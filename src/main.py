@@ -1,7 +1,7 @@
 import re
 import os
 import argparse
-from typing import Callable
+from typing import Callable, Match
 
 EXECUTE_REGEX = re.compile(r'\{\%(.*?)\%\}', re.DOTALL)
 EVALUATE_REGEX = re.compile(r'\{\{(.*?)\}\}', re.DOTALL)
@@ -10,7 +10,7 @@ template_namespace = {}
 
 def parse(template: str) -> str:
     def make_replacer(handler: Callable) -> Callable[[str], str]:
-        def replace(match: str) -> str:
+        def replace(match: Match) -> str:
             code = str(match[1]).strip()
             return str(handler(parse(code), globals(), template_namespace) or "")
         return replace
