@@ -12,6 +12,8 @@ The syntax is loosely based on Jinja templates:
 All of the parsing comes from Python's built-in `eval` and `exec` statements, so there are some limitations.
 For example, for loops cannot currently be spread apart in execution brackets, as Python will not be able to interpret the partial code. However, this can be worked around returning all the necessary HTML in another block.
 
+You can find the main parser [here](https://github.com/zsarge/PyHP/blob/main/src/main.py#L11-L25).
+
 ## Basic Example
 
 ```
@@ -34,7 +36,7 @@ will print:
 
 ## Including templates
 
-As demonstrated in the [Example Site](./example_site/), it is possible to include code from partial views:
+As demonstrated in the [example site](./example_site/), it is possible to include code from partial views:
 
 ```
 {{ include('./head.php') }}
@@ -46,7 +48,7 @@ Given these basic building blocks, it should be possible to create many types of
 
 ## Advanced example
 
-Given the example site[Example Site](./example_site/),
+Given the [example site](./example_site/),
 
 ```console
 $ python3 src/main.py --file $(realpath example_site/index.php)
@@ -67,7 +69,7 @@ produces
   <body>
     <h1>Hello World!</h1>
 
-    <p>Generated at 1685073637.0473356</p>
+    <p>Generated at 1685073812.9931087</p>
 
     <footer>&copy; 2023 Zack Sargent</footer>
   </body>
@@ -75,5 +77,15 @@ produces
 ```
 
 (with slightly different whitespace).
+
+![image](https://github.com/zsarge/PyHP/assets/46602241/9282b725-8109-4315-86d0-25e9532d6a43)
+
+## To Do
+
+- [x] Evaluate basic templates
+- [ ] Evaluate multiple templates from a director
+- [ ] Output to files / directories, instead of standard output
+- [ ] Include asset management system for non-template files
+- [ ] Figure out how to handle pagination
 
 #### Inspired by [CincyPy](https://cincypy.com/)
