@@ -12,7 +12,7 @@ The syntax is loosely based on Jinja templates:
 All of the parsing comes from Python's built-in `eval` and `exec` statements, so there are some limitations.
 For example, for loops cannot currently be spread apart in execution brackets, as Python will not be able to interpret the partial code. However, this can be worked around returning all the necessary HTML in another block.
 
-You can find the main parser [here](https://github.com/zsarge/PyHP/blob/main/src/main.py#L11-L31).
+You can find the main parser [here](https://github.com/zsarge/PyHP/blob/main/src/main.py#L11-L25).
 
 ## Basic Example
 
