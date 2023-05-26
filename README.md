@@ -34,7 +34,7 @@ will print:
 
 ## Including templates
 
-As demonstrated in the [Example Site](./example_site/), it is possible to include code from partial views:
+As demonstrated in the [example site](./example_site/), it is possible to include code from partial views:
 
 ```
 {{ include('./head.php') }}
@@ -46,7 +46,7 @@ Given these basic building blocks, it should be possible to create many types of
 
 ## Advanced example
 
-Given the example site[Example Site](./example_site/),
+Given the [example site](./example_site/),
 
 ```console
 $ python3 src/main.py --file $(realpath example_site/index.php)
