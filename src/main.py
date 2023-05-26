@@ -1,5 +1,6 @@
 import re
 import time
+from typing import Callable
 
 EXECUTE_REGEX = re.compile(r'\{\%(.*?)\%\}', re.DOTALL)
 EVALUATE_REGEX = re.compile(r'\{\{(.*?)\}\}', re.DOTALL)
@@ -9,15 +10,20 @@ template_namespace = {}
 
 
 def parse(template: str) -> str:
+    def make_replacer(handler: Callable) -> Callable[[str], str]:
+        def replace(match: str) -> str:
+            new_template = parse(str(match[1]).strip())
+            return str(handler(new_template, globals(), template_namespace) or "")
+        return replace
+
+    executor = make_replacer(exec)
+    evaluator = make_replacer(eval)
+
     # execute everything between '{%' and '%}' and replace them with nothing
-    template = EXECUTE_REGEX.sub(
-        lambda match: exec(str(match[1]).strip(), globals(), template_namespace), template)
+    template = EXECUTE_REGEX.sub(executor, template)
 
     # execute everything between '{{' and '}}' and recursively replace them with their result
-    def replace(match: str) -> str:
-        return str(eval(parse(str(match[1]).strip()), globals(), template_namespace))
-    new_template = EVALUATE_REGEX.sub(replace, template)
-    return new_template
+    return EVALUATE_REGEX.sub(evaluator, template)
 
 
 def main():
