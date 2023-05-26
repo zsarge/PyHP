@@ -11,17 +11,17 @@ template_namespace = {}
 def parse(template: str) -> str:
     def make_replacer(handler: Callable) -> Callable[[str], str]:
         def replace(match: str) -> str:
-            new_template = parse(str(match[1]).strip())
-            return str(handler(new_template, globals(), template_namespace) or "")
+            code = str(match[1]).strip()
+            return str(handler(parse(code), globals(), template_namespace) or "")
         return replace
 
     executor = make_replacer(exec)
     evaluator = make_replacer(eval)
 
-    # execute everything between '{%' and '%}' and replace them with nothing
+    # execute everything between '{%' and '%}' and replace it with nothing
     template = EXECUTE_REGEX.sub(executor, template)
 
-    # execute everything between '{{' and '}}' and recursively replace them with their result
+    # evaluate everything between '{{' and '}}' and recursively replace it with its result
     return EVALUATE_REGEX.sub(evaluator, template)
 
 
