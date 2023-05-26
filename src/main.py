@@ -1,11 +1,10 @@
 import re
-import time
+import os
+import argparse
 from typing import Callable
 
 EXECUTE_REGEX = re.compile(r'\{\%(.*?)\%\}', re.DOTALL)
 EVALUATE_REGEX = re.compile(r'\{\{(.*?)\}\}', re.DOTALL)
-
-
 template_namespace = {}
 
 
@@ -26,16 +25,24 @@ def parse(template: str) -> str:
     return EVALUATE_REGEX.sub(evaluator, template)
 
 
+def include(path: str):
+    assert os.path.isfile(path)
+    with open(path) as f:
+        return parse(f.read())
+
+
 def main():
-    template = r"""
-    <html>
-        {% def say_hello(n: int) -> str:
-            return 'hello! ' * n
-        %} 
-        {{ say_hello(10) }}
-    </html>
-     """
-    print(parse(template))
+    argParser = argparse.ArgumentParser()
+    argParser.add_argument(
+        '--file', type=str, help='Enter the path to the file you want to convert', required=True)
+    parsedArgs = argParser.parse_args()
+
+    assert os.path.isfile(parsedArgs.file)
+    # change director to specified file
+    os.chdir(os.path.dirname(parsedArgs.file))
+
+    with open(parsedArgs.file) as file:
+        print(parse(file.read()))
 
 
 if __name__ == "__main__":
