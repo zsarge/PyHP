@@ -67,7 +67,7 @@ produces
   <body>
     <h1>Hello World!</h1>
 
-    <p>Generated at 1685073637.0473356</p>
+    <p>Generated at 1685073812.9931087</p>
 
     <footer>&copy; 2023 Zack Sargent</footer>
   </body>
@@ -75,5 +75,15 @@ produces
 ```
 
 (with slightly different whitespace).
+
+![image](https://github.com/zsarge/PyHP/assets/46602241/9282b725-8109-4315-86d0-25e9532d6a43)
+
+## To Do
+
+- [x] Evaluate basic templates
+- [ ] Evaluate multiple templates from a director
+- [ ] Output to files / directories, instead of standard output
+- [ ] Include asset management system for non-template files
+- [ ] Figure out how to handle pagination
 
 #### Inspired by [CincyPy](https://cincypy.com/)
