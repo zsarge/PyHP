@@ -1,8 +1,6 @@
-# PyHP
+# PyHP - Python Home Page
 
-Python Home Page
-
-A static site generator built using only the Python standard library, used for templating in Python.
+> A static site generator built using only the Python standard library, used for templating in Python.
 
 The syntax is loosely based on Jinja templates:
 
@@ -45,5 +43,37 @@ As demonstrated in the [Example Site](./example_site/), it is possible to includ
 Given that `{{ ... }}` simply includes the results of evaluated code, the `include` function simply reads a file, parses it, and returns it as a string, for use in templating.
 
 Given these basic building blocks, it should be possible to create many types of static sites.
+
+## Advanced example
+
+Given the example site[Example Site](./example_site/),
+
+```console
+$ python3 src/main.py --file $(realpath example_site/index.php)
+```
+
+produces
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Example Document</title>
+  </head>
+
+  <body>
+    <h1>Hello World!</h1>
+
+    <p>Generated at 1685073637.0473356</p>
+
+    <footer>&copy; 2023 Zack Sargent</footer>
+  </body>
+</html>
+```
+
+(with slightly different whitespace).
 
 #### Inspired by [CincyPy](https://cincypy.com/)
