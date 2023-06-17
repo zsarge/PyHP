@@ -1,6 +1,8 @@
 # PyHP - Python Home Page
 
 > A static site generator built using only the Python standard library, used for templating in Python.
+>
+> **Check out [the blog post](https://zack.fyi/blog/pyhp.html) for more information!**
 
 The syntax is loosely based on Jinja templates:
 
