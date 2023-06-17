@@ -31,6 +31,11 @@ def include(path: str):
         return parse(f.read())
 
 
+def define(func):
+    globals()[func.__name__] = func
+    return lambda: func()
+
+
 def main():
     argParser = argparse.ArgumentParser()
     argParser.add_argument(
