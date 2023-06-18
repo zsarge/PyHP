@@ -9,7 +9,7 @@ template_namespace = {}
 
 
 def parse(template: str) -> str:
-    def make_replacer(handler: Callable) -> Callable[[str], str]:
+    def make_replacer(handler: Callable) -> Callable[[Match], str]:
         def replace(match: Match) -> str:
             code = str(match[1]).strip()
             return str(handler(parse(code), globals(), template_namespace) or "")
